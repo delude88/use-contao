@@ -27,7 +27,8 @@ export {
     ModuleModel,
     NewsReaderModel,
     UrlModel,
-    UserModel
+    UserModel,
+    getContao
 }
 
 export interface ContaoContext extends ContaoCache {

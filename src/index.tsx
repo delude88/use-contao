@@ -2,6 +2,11 @@ import * as React from "react";
 import {Context, useContext, useEffect, useState} from "react";
 import {getContao} from "./util";
 import {ContaoCache, ContaoDataRequest, ContaoRequest} from "./model/ContaoModel";
+import {PageModel} from "./model/PageModel";
+import NewsReaderModel from "./model/NewsReaderModel";
+import UrlModel from "./model/UrlModel";
+import ModuleModel from "./model/ModuleModel";
+import UserModel from "./model/UserModel";
 
 function arrayUnique(array: any[]) {
     const a = array.concat();
@@ -14,11 +19,30 @@ function arrayUnique(array: any[]) {
     return a;
 }
 
+export {
+    ContaoRequest,
+    ContaoCache,
+    ContaoDataRequest,
+    PageModel,
+    ModuleModel,
+    NewsReaderModel,
+    UrlModel,
+    UserModel
+}
+
 export interface ContaoContext extends ContaoCache {
     fetch: (request: ContaoDataRequest) => void
 }
 
 const contaoContext: Context<ContaoContext | null> = React.createContext<ContaoContext | null>(null);
+
+export const withContao = (Component: any) => {
+    return () => (
+        <contaoContext.Consumer>
+            {(contao: ContaoContext | null) => (<Component contao={contao}/>)}
+        </contaoContext.Consumer>
+    );
+};
 
 export const ContaoProvider = (props: {
     children: React.ReactNode;
@@ -93,17 +117,6 @@ export const useContao = (request: ContaoRequest) => {
             (request.user != undefined && request.user && context.user === null) ||
             (request.sitemap != undefined && request.sitemap && context.sitemap === null) ||
             (request.urls != undefined && request.urls && context.urls === null);
-
-        /*
-                return (request.module && (context.modules.some((m) => m.id !== request.module))) &&
-                    (request.modules && (request.modules.every(rq => context.modules.some(m => m.id !== rq)))) &&
-                    (request.page && (context.pages.some(p => p.url !== request.page))) &&
-                    (request.pages && (request.pages.every(rp => context.pages.some(p => p.url !== rp)))) &&
-                    (request.newsreader && (context.newsreaders.some(nr => nr.url !== request.newsreader))) &&
-                    (request.newsreaders && (request.newsreaders.every(rnr => context.newsreaders.some(nr => nr.url !== rnr)))) &&
-                    (request.user && request.user && context.user === null) &&
-                    (request.sitemap && request.sitemap && context.sitemap === null) &&
-                    (request.urls && request.urls && context.urls === null)*/
     });
 
     useEffect(() => {

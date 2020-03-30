@@ -1,0 +1,59 @@
+{
+  "name": "use-contao",
+  "version": "0.2.0",
+  "description": "React hooks to connect to the Contao Content API",
+  "repository": "delude88/use-contao",
+  "bugs": {
+    "url": "https://github.com/delude88/use-contao/issues"
+  },
+  "homepage": "https://github.com/delude88/use-contao#readme",
+  "keywords": [
+    "react",
+    "hook",
+    "nextjs",
+    "next",
+    "contao"
+  ],
+  "author": "Tobias Hegemann <hegemann@goodwillrun.de>",
+  "license": "MIT",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "module": "dist/index.es.js",
+  "jsnext:main": "dist/index.es.js",
+  "directories": {
+    "example": "example"
+  },
+  "engines": {
+    "node": ">=8",
+    "npm": ">=5"
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "rollup -c"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.2.2",
+    "@babel/runtime": "^7.3.1",
+    "@rollup/plugin-commonjs": "^11.0.2",
+    "@rollup/plugin-node-resolve": "^7.1.1",
+    "@rollup/plugin-url": "^4.0.2",
+    "@types/jest": "^23.3.13",
+    "@types/react": "^16.9.27",
+    "@types/react-dom": "^16.9.5",
+    "cross-env": "^5.2.0",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
+    "rollup": "^2.2.0",
+    "rollup-plugin-peer-deps-external": "^2.2.2",
+    "rollup-plugin-typescript2": "^0.26.0",
+    "typescript": "^3.8.3",
+    "isomorphic-unfetch": "latest"
+  },
+  "peerDependencies": {
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
+    "isomorphic-unfetch": "latest"
+  }
+}

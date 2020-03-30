@@ -7,6 +7,7 @@ import NewsReaderModel from "./model/NewsReaderModel";
 import UrlModel from "./model/UrlModel";
 import ModuleModel from "./model/ModuleModel";
 import UserModel from "./model/UserModel";
+import {ContaoInitialRequest} from "../dist/model/ContaoModel";
 
 function arrayUnique(array: any[]) {
     const a = array.concat();
@@ -23,6 +24,7 @@ export {
     ContaoRequest,
     ContaoCache,
     ContaoDataRequest,
+    ContaoInitialRequest,
     PageModel,
     ModuleModel,
     NewsReaderModel,

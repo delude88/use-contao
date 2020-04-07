@@ -1,13 +1,12 @@
 import * as React from "react";
 import {Context, useContext, useEffect, useState} from "react";
 import {getContao} from "./util";
-import {ContaoCache, ContaoDataRequest, ContaoRequest} from "./model/ContaoModel";
+import {ContaoCache, ContaoDataRequest, ContaoInitialRequest, ContaoRequest} from "./model/ContaoModel";
 import {PageModel} from "./model/PageModel";
 import NewsReaderModel from "./model/NewsReaderModel";
 import UrlModel from "./model/UrlModel";
 import ModuleModel from "./model/ModuleModel";
 import UserModel from "./model/UserModel";
-import {ContaoInitialRequest} from "../dist/model/ContaoModel";
 
 function arrayUnique(array: any[]) {
     const a = array.concat();
@@ -20,7 +19,7 @@ function arrayUnique(array: any[]) {
     return a;
 }
 
-export {
+export type {
     ContaoRequest,
     ContaoCache,
     ContaoDataRequest,
@@ -29,9 +28,10 @@ export {
     ModuleModel,
     NewsReaderModel,
     UrlModel,
-    UserModel,
-    getContao
+    UserModel
 }
+
+export {getContao}
 
 export interface ContaoContext extends ContaoCache {
     fetch: (request: ContaoDataRequest) => void

@@ -36,7 +36,7 @@ const getUrls = (server: string, lang?: string): Promise<UrlModel[]> => {
 const getPage = (server: string, url: string, lang?: string): Promise<PageModel | undefined> => {
     return fetch(server + Routes.page + "?url=" + url + resolveLanguage(lang, true))
         .then((r: Response) => r.json())
-        .then((a: any) => a ? PageModelFromJson(a[0]) : undefined);
+        .then((a: any) => a ? Array.isArray(a) ? PageModelFromJson(a[0]) : PageModelFromJson(a) : undefined);
 };
 const getModule = (server: string, id: number, lang?: string): Promise<ModuleModel | undefined> => {
     return fetch(server + Routes.module + "?id=" + id + resolveLanguage(lang, true))

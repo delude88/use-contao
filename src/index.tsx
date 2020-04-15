@@ -58,6 +58,7 @@ export const ContaoProvider = (props: {
             lang: props.lang ? props.lang : null
         },
         sitemap: null,
+        flatSitemap: null,
         user: null,
         urls: null,
         pages: [],
@@ -75,6 +76,7 @@ export const ContaoProvider = (props: {
                             server: prevState.server,
                             user: prevState.user ? prevState.user : result.user,
                             sitemap: prevState.sitemap ? prevState.sitemap : result.sitemap,
+                            flatSitemap: prevState.flatSitemap ? prevState.flatSitemap : result.flatSitemap,
                             urls: prevState.urls ? prevState.urls : result.urls,
                             pages: arrayUnique(prevState.pages.concat(result.pages)),
                             modules: arrayUnique(prevState.modules.concat(result.modules)),
@@ -100,6 +102,7 @@ export const useContao = (request: ContaoRequest) => {
             lang: request.server && request.server.lang ? request.server.lang : null
         },
         sitemap: null,
+        flatSitemap: null,
         user: null,
         urls: null,
         pages: [],
@@ -119,6 +122,7 @@ export const useContao = (request: ContaoRequest) => {
             (request.newsreaders != undefined && (!request.newsreaders.every(rnr => context.newsreaders.some(nr => nr.url === rnr)))) ||
             (request.user != undefined && request.user && context.user === null) ||
             (request.sitemap != undefined && request.sitemap && context.sitemap === null) ||
+            (request.flatSitemap != undefined && request.flatSitemap && context.flatSitemap === null) ||
             (request.urls != undefined && request.urls && context.urls === null);
     });
 

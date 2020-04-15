@@ -7,21 +7,57 @@ export interface ArticleModel {
     readonly alias: string;
     readonly inColumn: string;
     readonly published: boolean;
+    readonly sorting: number;
     readonly start: string;
     readonly stop: string;
     readonly content: ContentElementModel[];
     readonly compiledHTML: string;
 }
 
-export const ArticleModelFromJson = (json: any): ArticleModel => ({
-    url: json.url,
-    id: parseInt(json.id),
-    pid: parseInt(json.pid),
-    alias: json.alias,
-    inColumn: json.inColumn,
-    published: json.published,
-    start: json.start,
-    stop: json.stop,
-    content: json.content ? json.content.map((j: any) => ContentElementModelFromJson(j)) : [],
-    compiledHTML: json.compiledHTML
-});
+export const ArticleModelFromJson = (json: any): ArticleModel => {
+    const content: any[] = json.content;
+
+    const array: ContentElementModel[] = [];
+    if (content) {
+        const helperArray = [];
+
+        for (let i = 0; i < content.length; i++) {
+            const currentElement: ContentElementModel = ContentElementModelFromJson(content[i]);
+
+            switch (currentElement.wrapper) {
+                case 'start':
+                    helperArray.push(currentElement);
+                    break;
+                case 'stop':
+                    const container: ContentElementModel | undefined = helperArray.pop();
+                    if (helperArray.length > 0) {
+                        const parentContainer: ContentElementModel = helperArray[helperArray.length - 1];
+                        if (container)
+                            parentContainer.content.push(container);
+                        parentContainer.content.push(currentElement);
+                    } else {
+                        if (container)
+                            array.push(container);
+                        array.push(currentElement);
+                    }
+                    break;
+                default:
+                    if (helperArray.length > 0) {
+                        const container = helperArray[helperArray.length - 1];
+                        container.content.push(currentElement);
+                    } else {
+                        array.push(currentElement);
+                    }
+                    break;
+            }
+        }
+
+    }
+
+    return {
+        ...json,
+        id: parseInt(json.id),
+        pid: parseInt(json.pid),
+        content: array
+    }
+};

@@ -16,11 +16,6 @@ export interface ContentElementModel {
 }
 
 export const ContentElementModelFromJson = (json: any): ContentElementModel => {
-    let additionalValues = {};
-    if (json.rsce_data) {
-        additionalValues = JSON.parse(json.rsce_data);
-    }
-
     return {
         ...json,
         content: []

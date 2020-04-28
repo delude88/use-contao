@@ -1,6 +1,6 @@
 {
   "name": "use-contao",
-  "version": "0.2.5",
+  "version": "0.2.6",
   "description": "React hooks to connect to the Contao Content API",
   "repository": "delude88/use-contao",
   "bugs": {

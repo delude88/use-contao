@@ -29,15 +29,13 @@ export const ArticleModelFromJson = (json: any): ArticleModel => {
                     helperArray.push(currentElement);
                     break;
                 case 'stop':
-                    const container: ContentElementModel | undefined = helperArray.pop();
+                    const container: ContentElementModel = helperArray.pop();
                     if (helperArray.length > 0) {
                         const parentContainer: ContentElementModel = helperArray[helperArray.length - 1];
-                        if (container)
-                            parentContainer.content.push(container);
+                        parentContainer.content.push(container);
                         parentContainer.content.push(currentElement);
                     } else {
-                        if (container)
-                            array.push(container);
+                        array.push(container);
                         array.push(currentElement);
                     }
                     break;

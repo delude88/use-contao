@@ -43,9 +43,22 @@ export const PageModelFromJson = (json: any): PageModel => {
     }
 };
 
+
+const sortArticles = (articles: ArticleModel[]): ArticleModel[] => {
+    return articles.sort(
+        (a, b) => {
+            if (a.sorting > b.sorting) {
+                return 1;
+            }
+            if (a.sorting < b.sorting) {
+                return -1;
+            }
+            return 0;
+        });
+};
 const ColumnFromJson = (column: string, json: any): ColumnModel => {
     return {
         column: column,
-        articles: json.map((j: any) => ArticleModelFromJson(j))
+        articles: sortArticles(json.map((j: any) => ArticleModelFromJson(j)))
     };
 };

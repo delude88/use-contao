@@ -47,6 +47,8 @@ export const withContao = (Component: any) => {
     );
 };
 
+export const ContaoConsumer = contaoContext.Consumer;
+
 export const ContaoProvider = (props: {
     children: React.ReactNode;
     host: string;
